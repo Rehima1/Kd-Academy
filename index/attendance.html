@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KD Academy - Attendance</title>
+  <link rel="stylesheet" href="attendance.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Add your custom styles here */
+    .form-group label {
+      font-weight: bold;
+    }
+    .attendance-table th {
+      background-color: #007BFF;
+      color: white;
+    }
+    #attendance-records {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="bg-gradient-primary text-white text-center py-4">
+    <div class="container d-flex justify-content-between align-items-center">
+      <!-- Logo on the Left -->
+      <img src="Blue White Modern school Logo.png" alt="KD Academy Logo" class="logo">
+      <!-- Title in the Center -->
+      <h1 style="text-align: right;">Student Attendance</h1>
+    </div>
+  </header>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="#">KD Academy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="performance.html">Performance</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="profile.html">Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Attendance Form -->
+  <div class="container my-4">
+    <h2 class="text-center mb-4">Mark Attendance with Code</h2>
+    <!-- Form to input attendance -->
+    <form id="attendance-form">
+      <div class="form-group">
+        <label for="studentName">Student Name</label>
+        <input type="text" class="form-control" id="studentName" name="studentName" value="John Doe" disabled required>
+      </div>
+      <div class="form-group">
+        <label for="attendanceCode">Attendance Code</label>
+        <input type="text" class="form-control" id="attendanceCode" name="attendanceCode" placeholder="Enter the code provided by your teacher" required>
+      </div>
+      <div class="form-group">
+        <label for="status">Attendance Status</label>
+        <select class="form-select" id="status" name="status" required>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+  </div>
+
+  <!-- Attendance Records Table -->
+  <section id="attendance-records" class="container">
+    <h2>Your Attendance Records</h2>
+    <table id="attendance-table" class="table table-bordered attendance-table">
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Course</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="attendance-body">
+        <!-- Attendance records will be dynamically added here -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 KD Academy. All rights reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Define a mapping of attendance codes to courses
+    const courseCodes = {
+      "Math101Code": "Math 101",
+      "CS201Code": "CS 201",
+      "Physics303Code": "Physics 303"
+    };
+
+    // Simulate an empty list of attendance records
+    const attendanceRecords = [];
+
+    // Function to generate a unique attendance code for the day
+    function generateAttendanceCode(studentId, courseCode) {
+      const date = new Date();
+      return `${date.toISOString().split('T')[0]}-${studentId}-${courseCode}`;
+    }
+
+    // Handle form submission
+    document.getElementById('attendance-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const studentName = document.getElementById('studentName').value;
+      const attendanceCode = document.getElementById('attendanceCode').value;
+      const status = document.getElementById('status').value;
+
+      // Retrieve student ID based on name (this could be done via an API or from session)
+      const studentId = "12345"; // Replace with logic to get student ID from session or database
+
+      // Check if the code is valid and corresponds to a course
+      const course = Object.values(courseCodes).find(course => generateAttendanceCode(studentId, course) === attendanceCode);
+      if (!course) {
+        alert("Invalid attendance code. Please enter a valid code.");
+        return;
+      }
+
+      // Create a new record
+      const newRecord = {
+        studentName,
+        course,
+        date: new Date().toISOString().split('T')[0], // Use today's date
+        status
+      };
+
+      // Add the new record to the list
+      attendanceRecords.push(newRecord);
+
+      // Update the attendance records table
+      updateAttendanceTable();
+    });
+
+    // Update the attendance records table with new data
+    function updateAttendanceTable() {
+      const tbody = document.getElementById('attendance-body');
+      tbody.innerHTML = ''; // Clear the existing rows
+
+      // Loop through the records and add them to the table
+      attendanceRecords.forEach(record => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${record.studentName}</td>
+          <td>${record.course}</td>
+          <td>${record.date}</td>
+          <td>${record.status}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,134 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KD Academy Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-image:url(Blue\ White\ Modern\ school\ Logo\ \(1\).png);">
+    <header>
+        <div class="container-head" style="background-color: #192b3fba; padding: 20px 0; text-align: center; display: flex; justify-content: center; align-items: center; height: 90px;">
+            <img src="/ass/Blue White Modern school Logo.png" alt="KD Academy Logo" class="logo" style="width: 110px; height: 110px; margin-right: 20px; margin-right: 900px;">
+            <h1>KD ACADEMY</h1>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">KD Academy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#signup">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <!-- Login Section (Visible by Default) -->
+        <section id="login" class="card shadow-lg p-4 mb-4" style="width: 100%; max-width: 400px;">
+            <h2 class="card-title text-center mb-4">Login</h2>
+            <form action="dashboard.html" method="GET">
+                <div class="mb-3">
+                    <label for="student-id" class="form-label">Student ID:</label>
+                    <input type="text" id="student-id" name="student-id" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+            <!-- Forgot Password Link -->
+            <div class="mt-3 text-center">
+                <a href="#forgot-password" class="text-decoration-none">Forgot Password?</a>
+            </div>
+        </section>
+
+        <!-- Sign Up Section (Hidden by Default) -->
+        <section id="signup" class="card shadow-lg p-4" style="width: 100%; max-width: 400px; display: none;">
+            <h2 class="card-title text-center mb-4">Sign Up</h2>
+            <form action="dashboard.html" method="GET">
+                <div class="mb-3">
+                    <label for="student-id-signup" class="form-label">Student ID:</label>
+                    <input type="text" id="student-id-signup" name="student-id" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="full-name" class="form-label">Full Name:</label>
+                    <input type="text" id="full-name" name="full-name" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password-signup" class="form-label">Password:</label>
+                    <input type="password" id="password-signup" name="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+            </form>
+            <div class="mt-3 text-center">
+                <p>Already have an account? <a href="#login" class="text-decoration-none">Login here</a></p>
+            </div>
+        </section>
+
+        <!-- Forgot Password Section (Hidden by Default) -->
+        <section id="forgot-password" class="card shadow-lg p-4" style="width: 100%; max-width: 400px; display: none;">
+            <h2 class="card-title text-center mb-4">Reset Password</h2>
+            <form action="reset-password.html" method="GET">
+                <div class="mb-3">
+                    <label for="email-reset" class="form-label">Enter your email:</label>
+                    <input type="email" id="email-reset" name="email" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Reset Password</button>
+            </form>
+            <div class="mt-3 text-center">
+                <a href="#login" class="text-decoration-none">Back to Login</a>
+            </div>
+        </section>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3">
+        &copy; 2025 KD Academy. All rights reserved.
+    </footer>
+
+    <!-- Bootstrap JS (for responsive navbar functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Script to toggle the display between login, sign-up, and forgot password sections
+        document.querySelectorAll('a[href="#signup"]').forEach(function (element) {
+            element.addEventListener('click', function () {
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('signup').style.display = 'block';
+                document.getElementById('forgot-password').style.display = 'none';
+            });
+        });
+
+        document.querySelectorAll('a[href="#forgot-password"]').forEach(function (element) {
+            element.addEventListener('click', function () {
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('signup').style.display = 'none';
+                document.getElementById('forgot-password').style.display = 'block';
+            });
+        });
+
+        document.querySelectorAll('a[href="#login"]').forEach(function (element) {
+            element.addEventListener('click', function () {
+                document.getElementById('login').style.display = 'block';
+                document.getElementById('signup').style.display = 'none';
+                document.getElementById('forgot-password').style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
