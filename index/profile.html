@@ -99,10 +99,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Logout</a>
+                        <a class="nav-link" href="login.html">Logout</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                        <a class="nav-link" href="Dashboard.html"></a>
                     </li>
                 </ul>
             </div>
@@ -116,35 +116,72 @@
             <a href="#change-password" id="change-password-tab">Change Password</a>
         </div>
         <div class="content">
-            <!-- Personal Info Section -->
             <div id="personal-info">
                 <h3>Personal Info</h3>
                 <form action="update_profile.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group-horizontal">
                         <div class="mb-3 text-center">
-                            <img src="/ass/istockphoto-1248930668-612x612.jpg" alt="Profile Picture" class="profile-img mb-3" style="width: 150px; height: 150px; border-radius: 50%;" id="profile-img-preview">
-                            <input type="file" class="form-control mt-2" id="profile-pic" name="profile-pic" style="display: none;">
+                            <!-- Profile Picture -->
+                            <label for="profile-pic" style="cursor: pointer;">
+                                <img 
+                                    src="/uploads/<?php echo $user['profile_pic']; ?>" 
+                                    alt="Profile Picture" 
+                                    class="profile-img mb-3" 
+                                    style="width: 150px; height: 150px; border-radius: 50%;" 
+                                    id="profile-img-preview"
+                                >
+                            </label>
+                            <input 
+                                type="file" 
+                                class="form-control d-none" 
+                                id="profile-pic" 
+                                name="profile_pic" 
+                                accept="image/*" 
+                                onchange="previewProfilePic(event)">
                         </div>
+                        <input type="hidden" name="student_id" value="<?php echo $user['student_id']; ?>">
                         <div class="mb-3">
                             <label for="full-name" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="full-name" name="full-name" value="Rehima Kemal">
+                            <input type="text" class="form-control" id="full-name" name="full_name" value="<?php echo $user['full_name']; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="Rehima@example.com">
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $user['email']; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="ID" class="form-label">Student ID</label>
-                            <input type="text" class="form-control" id="ID" name="ID" value="Kd1234567">
+                            <input type="text" class="form-control" id="ID" name="student_id" value="<?php echo $user['student_id']; ?>" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="Year" class="form-label">Year</label>
-                            <input type="text" class="form-control" id="Year" name="Year" value="Year 3">
+                            <input type="text" class="form-control" id="Year" name="year" value="<?php echo $user['year']; ?>">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" style="background-color: #485f79; margin-left: 400px;">Update Profile</button>
                 </form>
             </div>
+            
+            
+            <script>
+                
+                function previewProfilePic(event) {
+                    const imgPreview = document.getElementById('profile-img-preview');
+                    const file = event.target.files[0];
+            
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            imgPreview.src = e.target.result; 
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+            
+                
+                document.getElementById('profile-img-preview').addEventListener('click', () => {
+                    document.getElementById('profile-pic').click();
+                });
+            </script>
 
             <!-- Change Password Section -->
             <div id="change-password" style="display: none;">

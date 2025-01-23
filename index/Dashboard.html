@@ -35,8 +35,8 @@
 
     <main>
         <div class="container">
-            <h2 class="text-center mb-4">Welcome, [Student Name]!</h2>
 
+            <h2 class="text-center mb-4">Welcome, <?php echo htmlspecialchars($student_name); ?>!</h2>
             <div class="dashboard-container">
                 <!-- Dashboard Cards -->
                 <div class="dashboard-card">
@@ -72,3 +72,4 @@
     </footer>
 </body>
 </html>
+
