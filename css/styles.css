@@ -28,12 +28,13 @@ body {
     margin-right: 20px;
 }
 
-footer {
+.footer {
     background-color: #343a40;
     color: white;
     text-align: center;
     padding: 20px 0;
     font-size: 1rem;
+    margin-top: 500px;
 }
 
 /* Navbar Styles */
