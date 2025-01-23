@@ -27,6 +27,9 @@ body {
     height: 90px;
     margin-right: 20px;
 }
+main {
+    flex: 1;
+}
 
 .footer {
     background-color: #343a40;
@@ -34,7 +37,7 @@ body {
     text-align: center;
     padding: 20px 0;
     font-size: 1rem;
-    margin-top: 500px;
+
 }
 
 /* Navbar Styles */
@@ -88,41 +91,7 @@ body {
     color: #adc5e6;
 }
 
-/* Form Styles */
-form {
-    margin-top: 20px;
-}
 
-label {
-    font-weight: bold;
-}
-
-input, select {
-    width: 200px;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-button {
-    width: fit-content;
-    padding: 10px 20px;
-    margin: 0 auto;
-    display: block;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #f0f0f0;
-}
-
-/* Profile Page Styles */
-.profile-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ccc;
-}
 
 /* Optional: Ensure responsive alignment */
 @media (max-width: 768px) {
