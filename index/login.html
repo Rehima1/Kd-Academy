@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KD Academy Portal</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/ass/Blue White Modern school Logo.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="background-image:url(Blue\ White\ Modern\ school\ Logo\ \(1\).png);">
@@ -34,7 +35,7 @@
     </nav>
 
     <div class="container d-flex justify-content-center align-items-center vh-100" style="background-image: url(/ass/Blue\ White\ Modern\ school\ Logo\ \(2\).png);">
-        <!-- Login Section (Visible by Default) -->
+        
         <section id="login" class="card shadow-lg p-4 mb-4" style="width: 100%; max-width: 400px;">
             <h2 class="card-title text-center mb-4">Login</h2>
             <form action="dashboard.html" method="GET">
@@ -48,13 +49,12 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100"  style="background-color:#485f79 ;">Login</button>
             </form>
-            <!-- Forgot Password Link -->
+
             <div class="mt-3 text-center">
                 <a href="#forgot-password" class="text-decoration-none " style="color:#485f79 ;">Forgot Password?</a>
             </div>
         </section>
 
-        <!-- Sign Up Section (Hidden by Default) -->
         <section id="signup" class="card shadow-lg p-4" style="width: 100%; max-width: 400px; display: none;">
             <h2 class="card-title text-center mb-4">Sign Up</h2>
             <form action="dashboard.html" method="GET">
@@ -81,7 +81,6 @@
             </div>
         </section>
 
-        <!-- Forgot Password Section (Hidden by Default) -->
         <section id="forgot-password" class="card shadow-lg p-4" style="width: 100%; max-width: 400px; display: none;">
             <h2 class="card-title text-center mb-4" style="color: #1c222e;">Reset Password</h2>
             <form action="reset-password.html" method="GET">
@@ -101,11 +100,9 @@
         &copy; 2025 KD Academy. All rights reserved.
     </footer>
 
-    <!-- Bootstrap JS (for responsive navbar functionality) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
     <script>
-        // Script to toggle the display between login, sign-up, and forgot password sections
         document.querySelectorAll('a[href="#signup"]').forEach(function (element) {
             element.addEventListener('click', function () {
                 document.getElementById('login').style.display = 'none';

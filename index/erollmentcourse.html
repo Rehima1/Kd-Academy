@@ -99,8 +99,8 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="container-head" style="background-color: #192b3fba; padding: 20px 0; text-align: center; display: flex; justify-content: center; align-items: center; height: 90px;">
-            <img src="/ass/Blue White Modern school Logo.png" alt="KD Academy Logo" class="logo" style="width: 110px; height: 110px; margin-right: 20px; margin-right: 900px;">
+        <div class="container-head">
+            <img src="/ass/Blue White Modern school Logo.png" alt="KD Academy Logo" class="logo">
             <h1>KD ACADEMY</h1>
         </div>
     </header>
@@ -130,19 +130,18 @@
         <h3>Student Information</h3>
         <p><strong>Student Name:</strong> <span id="studentName">Rehima Kemal</span></p>
         <p><strong>Student ID:</strong> <span id="studentId">KD1234567</span></p>
-        <form id="enrollment-form">
+        <form id="enrollment-form" action="/php/enroll.php" method="POST">
             <h2>Enroll in a Class</h2>
             <div class="mb-3">
                 <label for="classSelect" class="form-label">Select Class to Enroll:</label>
-                <select class="form-select" id="classSelect" required>
+                <select class="form-select" id="classSelect" name="course_id" required>
                     <option value="">Select Class</option>
-                    <option value="Math 101">Math 101</option>
-                    <option value="CS 201">CS 201</option>
-                    <option value="Physics 303">Physics 303</option>
+                    <option value="1">Math 101</option>
+                    <option value="2">CS 201</option>
+                    <option value="3">Physics 303</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" style="background-color: #485f79; margin-left: 500px;">Enroll</button>
-            
+            <button type="submit" class="btn btn-primary">Enroll</button>
         </form>
     </div>
 
@@ -163,19 +162,16 @@
                 <!-- Records will be dynamically added here -->
             </tbody>
         </table>
-        <button type="submit" class="btn btn-primary" style="background-color: #485f79; margin-left: 500px;" onclick="window.print();">Print Enrollment Report</button>
+        <button type="submit" class="btn btn-primary" onclick="window.print();">Print Enrollment Report</button>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
+    <footer>
         &copy; 2025 KD Academy. All rights reserved.
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const form = document.getElementById("enrollment-form");
-        const classSelect = document.getElementById("classSelect");
-        const enrolledClasses = JSON.parse(localStorage.getItem("enrolledClasses")) || [];
         const tbody = document.getElementById("enrolled-class-tbody");
 
         function loadStudentInfo() {
@@ -185,46 +181,22 @@
             document.getElementById("studentId").textContent = studentId;
         }
 
-        function renderEnrolledClasses() {
-            tbody.innerHTML = "";
-            enrolledClasses.forEach((enrollment, index) => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${enrollment.studentId}</td>
-                    <td>${enrollment.course}</td>
-                    <td>${enrollment.dateEnrolled}</td>
-                    <td><button class="btn btn-danger btn-sm" onclick="removeClass(${index})">Remove</button></td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
-            const selectedClass = classSelect.value;
-            if (selectedClass) {
-                if (enrolledClasses.find(c => c.course === selectedClass)) {
-                    alert(`${selectedClass} is already enrolled.`);
-                    return;
-                }
-                const enrollment = {
-                    studentId: document.getElementById("studentId").textContent,
-                    course: selectedClass,
-                    dateEnrolled: new Date().toLocaleString()
-                };
-                enrolledClasses.push(enrollment);
-                localStorage.setItem("enrolledClasses", JSON.stringify(enrolledClasses));
-                renderEnrolledClasses();
-                alert("Enrollment successful!");
-            } else {
-                alert("Please select a class to enroll.");
-            }
-        });
-
-        function removeClass(index) {
-            enrolledClasses.splice(index, 1);
-            localStorage.setItem("enrolledClasses", JSON.stringify(enrolledClasses));
-            renderEnrolledClasses();
+        function fetchEnrolledClasses() {
+            fetch('/php/get_enrollments.php')
+                .then(response => response.json())
+                .then(data => {
+                    tbody.innerHTML = "";
+                    data.forEach(enrollment => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${enrollment.student_id}</td>
+                            <td>${enrollment.course_name}</td>
+                            <td>${enrollment.enrollment_date}</td>
+                            <td>${enrollment.status}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                });
         }
 
         document.getElementById("searchInput").addEventListener("input", function () {
@@ -236,7 +208,7 @@
         });
 
         loadStudentInfo();
-        renderEnrolledClasses();
+        fetchEnrolledClasses();
     </script>
 </body>
 

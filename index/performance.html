@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KD Academy - Enroll in Classes</title>
-    <link rel="stylesheet" href="/css/styles.css">    
+    <title>KD Academy - Performance</title>
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="icon" href="/ass/Blue White Modern school Logo.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -40,7 +40,7 @@
             margin-right: 20px;
         }
 
-        .footer {
+        footer {
             background-color: #343a40;
             color: white;
             text-align: center;
@@ -49,7 +49,6 @@
         }
 
         .navbar {
-
             background-color: #2c343c;
         }
 
@@ -89,8 +88,8 @@
         }
 
         @media screen and (max-width: 800px) {
-            .enrollment-table th,
-            .enrollment-table td {
+            .performance-table th,
+            .performance-table td {
                 padding: 10px;
                 font-size: 0.9rem;
             }
@@ -99,15 +98,13 @@
 </head>
 
 <body>
-    <!-- Header -->
     <header>
-        <div class="container-head" style="background-color: #192b3fba; padding: 20px 0; text-align: center; display: flex; justify-content: center; align-items: center; height: 90px;">
-            <img src="/ass/Blue White Modern school Logo.png" alt="KD Academy Logo" class="logo" style="width: 110px; height: 110px; margin-right: 20px; margin-right: 900px;">
+        <div class="container-head">
+            <img src="/ass/Blue White Modern school Logo.png" alt="KD Academy Logo" class="logo">
             <h1>KD ACADEMY</h1>
         </div>
     </header>
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="#">KD Academy</a>
@@ -117,7 +114,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Logout</a>
+                        <a class="nav-link" href="index.html">Logout</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard.html">Dashboard</a>
@@ -127,112 +124,51 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container-1">
-        <h3>Student Information</h3>
-        <p><strong>Student Name:</strong> <span id="studentName">Loading...</span></p>
-        <p><strong>Student ID:</strong> <span id="studentID">Loading...</span></p>
-        <p><strong>Current Semester:</strong> <span id="semester">Loading...</span></p>
-        <div class="form-group">
-            <label for="semesterSelect"><strong>Select Previous Semester:</strong></label>
-            <select class="form-select" id="semesterSelect">
-                <option value="">Select Semester</option>
-                <option value="Fall 2024">Fall 2024</option>
-                <option value="Spring 2024">Spring 2024</option>
-                <option value="Fall 2023">Fall 2023</option>
-            </select>
-            <button class="btn btn-primary mt-3" id="submitSemester" style="margin-left: 500px; background-color: #485f79;">Submit</button>
-        </div>
-    </div>
-
-    <section id="performance-section" class="container-1">
-        <h2 class="text-center mb-4">Your Performance</h2>
+        <h2 class="text-center mb-4">Your Performance Records</h2>
         <table class="table table-bordered performance-table">
             <thead>
                 <tr>
                     <th>Course</th>
+                    <th>Semester</th>
                     <th>Grade</th>
-                    <th>Credits</th>
-                    <th>Status</th>
+                    <th>Comments</th>
+                    <th>Date</th>
                 </tr>
             </thead>
-            <tbody id="performance-tbody">
-                <!-- Records will be dynamically added here -->
+            <tbody id="performance-body">
+                <!-- Performance records will be dynamically added here -->
             </tbody>
         </table>
-    </section>
+    </div>
 
-    <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">
         &copy; 2025 KD Academy. All rights reserved.
     </footer>
 
-    <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- JavaScript -->
     <script>
-        // Simulated student data
-        const studentData = {
-            name: "Rehima Kemal",
-            studentID: "KD3456789",
-            semester: "Spring 2025",
-        };
-
-        // Simulated performance data
-        const performanceData = {
-            "Fall 2024": [
-                { course: "Math 201", grade: "A", credits: 3, status: "Completed" },
-                { course: "CS 301", grade: "B+", credits: 4, status: "Completed" },
-            ],
-            "Spring 2024": [
-                { course: "Physics 101", grade: "A-", credits: 3, status: "Completed" },
-                { course: "History 201", grade: "B", credits: 3, status: "Completed" },
-            ],
-            "Fall 2023": [
-                { course: "Biology 101", grade: "A", credits: 3, status: "Completed" },
-                { course: "Chemistry 201", grade: "A-", credits: 4, status: "Completed" },
-            ],
-        };
-
-        // Update the student info dynamically
-        function updateStudentInfo() {
-            document.getElementById("studentName").innerText = studentData.name;
-            document.getElementById("studentID").innerText = studentData.studentID;
-            document.getElementById("semester").innerText = studentData.semester;
-        }
-
-        // Display performance data for a selected semester
-        function displayPerformance(semester) {
-            const tbody = document.getElementById("performance-tbody");
-            tbody.innerHTML = ""; // Clear existing rows
-            if (performanceData[semester]) {
-                performanceData[semester].forEach((record) => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${record.course}</td>
-                        <td>${record.grade}</td>
-                        <td>${record.credits}</td>
-                        <td>${record.status}</td>
-                    `;
-                    tbody.appendChild(row);
+        function fetchPerformanceRecords() {
+            fetch('/php/get_performance.php')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('performance-body');
+                    tbody.innerHTML = '';
+                    data.forEach(record => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${record.course_name}</td>
+                            <td>${record.semester}</td>
+                            <td>${record.grade}</td>
+                            <td>${record.comments}</td>
+                            <td>${record.performance_date}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
                 });
-            } else {
-                tbody.innerHTML = "<tr><td colspan='4'>No data available for the selected semester.</td></tr>";
-            }
         }
 
-        // Handle semester selection
-        document.getElementById("submitSemester").addEventListener("click", () => {
-            const semester = document.getElementById("semesterSelect").value;
-            displayPerformance(semester);
-        });
-
-        // Call the function on page load
-        document.addEventListener("DOMContentLoaded", () => {
-            updateStudentInfo();
-            displayPerformance("Fall 2024"); // Default semester display
-        });
+        fetchPerformanceRecords();
     </script>
 </body>
 
