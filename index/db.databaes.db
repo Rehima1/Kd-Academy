@@ -46,27 +46,6 @@ CREATE TABLE attendance (
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
 );
 
--- Create the grades table
-CREATE TABLE grades (
-    grade_id INT AUTO_INCREMENT PRIMARY KEY,
-    student_id INT NOT NULL,
-    course_id INT NOT NULL,
-    grade VARCHAR(2) NOT NULL,
-    grade_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (student_id) REFERENCES students(student_id),
-    FOREIGN KEY (course_id) REFERENCES courses(course_id)
-);
-
--- Create the resources table
-CREATE TABLE resources (
-    resource_id INT AUTO_INCREMENT PRIMARY KEY,
-    course_id INT NOT NULL,
-    resource_name VARCHAR(100) NOT NULL,
-    resource_link VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (course_id) REFERENCES courses(course_id)
-);
-
 -- Create the profiles table
 CREATE TABLE profiles (
     profile_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -75,4 +54,26 @@ CREATE TABLE profiles (
     profile_image VARCHAR(255),
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (student_id) REFERENCES students(student_id)
+);
+
+-- Create the users table for authentication
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create the performance table
+CREATE TABLE performance (
+    performance_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    semester VARCHAR(50) NOT NULL,
+    grade VARCHAR(2) NOT NULL,
+    comments TEXT,
+    performance_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
 );

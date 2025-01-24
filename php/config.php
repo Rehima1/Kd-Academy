@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "123123";
 $dbname = "kd_academy";
 
 // Create connection
