@@ -1,5 +1,7 @@
 <?php
-// Function to get performance data
+session_start();
+include 'db_connection.php';
+
 function getPerformanceData($conn) {
     $sql = "SELECT * FROM performance";
     $result = $conn->query($sql);
@@ -13,7 +15,6 @@ function getPerformanceData($conn) {
     }
 }
 
-// Function to add performance data
 function addPerformanceData($conn, $name, $score) {
     $sql = "INSERT INTO performance (name, score) VALUES ('$name', '$score')";
 
@@ -24,7 +25,6 @@ function addPerformanceData($conn, $name, $score) {
     }
 }
 
-// Function to update performance data
 function updatePerformanceData($conn, $id, $name, $score) {
     $sql = "UPDATE performance SET name='$name', score='$score' WHERE id=$id";
 
@@ -35,7 +35,6 @@ function updatePerformanceData($conn, $id, $name, $score) {
     }
 }
 
-// Function to delete performance data
 function deletePerformanceData($conn, $id) {
     $sql = "DELETE FROM performance WHERE id=$id";
 
@@ -46,6 +45,5 @@ function deletePerformanceData($conn, $id) {
     }
 }
 
-// Close connection
 $conn->close();
 ?>

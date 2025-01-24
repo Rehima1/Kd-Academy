@@ -2,7 +2,7 @@
 session_start();
 include 'db_connection.php';
 
-$student_id = $_SESSION['student_id']; // Assuming the student's ID is stored in the session
+$student_id = $_SESSION['student_id']; 
 
 $stmt = $conn->prepare("SELECT p.performance_id, c.course_name, p.semester, p.grade, p.comments, p.performance_date 
                         FROM performance p 

@@ -9,11 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    $student_id = $_SESSION['student_id']; // Assuming the student's ID is stored in the session
+    $student_id = $_SESSION['student_id']; 
     $attendance_code = $_POST['attendanceCode'];
     $status = $_POST['status'];
 
-    // Fetch course_id based on the attendance code
     $stmt = $conn->prepare("SELECT course_id FROM courses WHERE attendance_code = ?");
     $stmt->bind_param("s", $attendance_code);
     $stmt->execute();
@@ -24,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $course_id = $course['course_id'];
         $attendance_date = date('Y-m-d');
 
-        // Insert attendance data into the attendance table
         $stmt = $conn->prepare("INSERT INTO attendance (student_id, course_id, attendance_date, attendance_code, status) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("iisss", $student_id, $course_id, $attendance_date, $attendance_code, $status);
 

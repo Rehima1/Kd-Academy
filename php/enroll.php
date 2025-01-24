@@ -2,22 +2,19 @@
 session_start();
 include 'db_connection.php';
 
-// Check if the student is logged in
 if (!isset($_SESSION['student_id'])) {
     header('Location: login.html');
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $student_id = $_SESSION['student_id']; // Get student ID from session
-    $course_id = $_POST['course_id']; // Get the selected course ID
+    $student_id = $_SESSION['student_id'];
+    $course_id = $_POST['course_id']; 
 
-    // Validate the course ID (additional layer of security)
     if (empty($course_id) || !is_numeric($course_id)) {
         die("Invalid course selection.");
     }
 
-    // Insert enrollment data into the enrollments table
     $stmt = $conn->prepare("INSERT INTO enrollments (student_id, course_id, status) VALUES (?, ?, 'Enrolled')");
     $stmt->bind_param("ii", $student_id, $course_id);
 

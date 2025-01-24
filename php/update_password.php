@@ -10,7 +10,7 @@ if ($new_password !== $confirm_password) {
     die('Error: New passwords do not match!');
 }
 
-$user_id = 1; // Replace with the logged-in user's ID from the session.
+$user_id = 1;
 
 $sql = "SELECT password FROM users WHERE id = ?";
 $stmt = $conn->prepare($sql);
@@ -45,7 +45,7 @@ if ($new_password !== $confirm_password) {
     die('Error: New passwords do not match!');
 }
 
-$user_id = 1; // Replace with the logged-in user's ID from the session.
+$user_id = 1; 
 
 $sql = "SELECT password FROM users WHERE id = ?";
 $stmt = $conn->prepare($sql);
