@@ -43,6 +43,9 @@ find it in "databaseScript.db"
 ![Screenshot 2025-01-24 213450](https://github.com/user-attachments/assets/d2e1947d-7eb2-461b-9af6-2dcb54f76163)
 ![Screenshot 2025-01-24 213144](https://github.com/user-attachments/assets/1d8d03ab-f0d2-4ce4-a63f-366212ab84c0)
 ![Screenshot 2025-01-24 221919](https://github.com/user-attachments/assets/70607638-e2a0-419a-80be-32dbb5975857)
+![Screenshot 2025-01-24 220332](https://github.com/user-attachments/assets/6e69e0c1-a016-4190-b2c3-b6562b306ab1)
+![Screenshot 2025-01-24 213125](https://github.com/user-attachments/assets/78c68130-4f50-4a1e-bbc9-9a8af7f677b5)
+
 
 
 ## License
